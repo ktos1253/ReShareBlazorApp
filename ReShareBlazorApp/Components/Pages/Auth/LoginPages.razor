@@ -1,0 +1,7 @@
+﻿@page "/login"
+@rendermode InteractiveServer
+@inject NavigationManager nav
+<h3>LoginPages</h3>
+<button class="btn btn-primary" @onclick='() => nav.NavigateTo("/register")'>Nie masz konta? Zarejestuj sie!</button>
+@code {
+}

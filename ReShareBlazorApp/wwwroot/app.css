@@ -1,0 +1,124 @@
+
+.navbar {
+    background: #111827;
+    padding: 15px 30px;
+    border-bottom: 1px solid #263449;
+}
+
+    .navbar .container-fluid {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 25px;
+    }
+
+/* Logo */
+.navbar-brand {
+    color: #f8fafc;
+    font-size: 23px;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+    margin: 0;
+}
+
+    .navbar-brand:hover {
+        color: #60a5fa;
+    }
+
+/* Menu */
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.nav-link {
+    color: #9ca3af;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+    .nav-link:hover,
+    .nav-link.active {
+        color: #60a5fa;
+        background: #1e293b;
+    }
+
+/* Wyszukiwarka */
+.navbar form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.navbar input {
+    width: 200px;
+    height: 40px;
+    padding: 0 12px;
+    background: #1f2937;
+    color: #f8fafc;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    outline: none;
+}
+
+    .navbar input::placeholder {
+        color: #9ca3af;
+    }
+
+    .navbar input:focus {
+        border-color: #3b82f6;
+    }
+
+.navbar button {
+    height: 40px;
+    width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+    .navbar button:hover {
+        background: #1d4ed8;
+    }
+
+/* Małe ekrany */
+@media (max-width: 650px) {
+    .navbar .container-fluid {
+        flex-wrap: wrap;
+    }
+
+    .navbar-nav {
+        order: 3;
+        width: 100%;
+    }
+
+    .navbar form {
+        flex: 1;
+    }
+
+    .navbar input {
+        width: 100%;
+        min-width: 0;
+    }
+}
