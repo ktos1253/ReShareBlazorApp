@@ -122,3 +122,141 @@
         min-width: 0;
     }
 }
+
+/* Tło strony */
+.register-container {
+    min-height: calc(100vh - 72px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background: #0f172a;
+}
+
+/* Karta rejestracji */
+.register-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 40px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+    /* Nagłówek */
+    .register-card h2 {
+        color: #f8fafc;
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    .register-card p {
+        color: #94a3b8;
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+/* Pola formularza */
+.register-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+    .register-field label {
+        color: #cbd5e1;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+.register-input {
+    width: 100%;
+    height: 46px;
+    padding: 0 14px;
+    background: #0f172a;
+    color: #f8fafc;
+    border: 1px solid #334155;
+    border-radius: 9px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s ease;
+    box-sizing: border-box;
+}
+
+    .register-input::placeholder {
+        color: #64748b;
+    }
+
+    .register-input:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+/* Regulamin */
+.register-terms {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0 5px;
+}
+
+    .register-terms input {
+        width: 17px;
+        height: 17px;
+        accent-color: #2563eb;
+        cursor: pointer;
+    }
+
+    .register-terms label {
+        color: #cbd5e1;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+/* Walidacja */
+.validation-message {
+    color: #f87171;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Przycisk */
+.register-button {
+    width: 100%;
+    height: 48px;
+    margin-top: 20px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+    .register-button:hover {
+        background: #1d4ed8;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+    }
+
+    .register-button:active {
+        transform: translateY(0);
+    }
+
+/* Telefon */
+@media (max-width: 480px) {
+    .register-card {
+        padding: 25px 20px;
+    }
+
+        .register-card h2 {
+            font-size: 24px;
+        }
+}

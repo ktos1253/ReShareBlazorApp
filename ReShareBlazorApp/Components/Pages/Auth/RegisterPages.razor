@@ -1,8 +1,56 @@
 ﻿@page "/register"
-<h3>RegisterPages</h3>
+@using ReShareBlazorApp.Models
+<EditForm Model="@registerModel" OnInvalidSubmit="Register">
+    <DataAnnotationsValidator/>
+    <div class="register-container">
+        <div class="register-card">
+            <h2>Utwórz konto</h2>
+            <p>Wypełnij formularz, aby sie zarejsetrowac</p>
+            <div class="register-field">
+                <label>Nazwa użytkownika</label>
+                <InputText @bind-Value="registerModel.Username"
+                class="register-input"
+                placeholder = "Wpisz naze uzytkownika"/>
+                <ValidationMessage For="@(() => registerModel.Username)"/>
+            </div>
+            <div class="register-field">
+                <label>E-mail</label>
+                <InputText @bind-Value="registerModel.Email"
+                class="register-input"
+                placeholder = "Wpisz e-mail"/>
+                <ValidationMessage For="@(() => registerModel.Email)"/>
+            </div>
+            <div class="register-field">
+                <label>Hasło</label>
+                <InputText @bind-Value="registerModel.Password"
+                class="register-input"
+                placeholder = "Wpisz hasło"/>
+                <ValidationMessage For="@(() => registerModel.Password)"/>
+            </div>
+            <div class="register-field">
+                <label>Powtórz hasło</label>
+                <InputText @bind-Value="registerModel.ConfirmPassword"
+                class="register-input"
+                placeholder = "Potwirdz hasło"/>
+                <ValidationMessage For="@(() => registerModel.ConfirmPassword)"/>
+            </div>
+            <div class="register-terms">
+                <InputCheckbox @bind-Value="registerModel.AcceptTerms"/>
+                <label>Akceptuje regulamin</label>
+            </div>
+            <ValidationMessage For="@(() => registerModel.AcceptTerms)"/>
+            <button type="submit" class="register-button">
+                Zarejestruj sie
+            </button>
+        </div>
+    </div>
+</EditForm>
 
 @code {
-    private string _username = string.Empty;
-    private string _email = string.Empty;
-    private string password = string.Empty;
+    private RegisterModel registerModel = new RegisterModel();
+    private async Task Register()
+    {
+        
+    }
 }
+
