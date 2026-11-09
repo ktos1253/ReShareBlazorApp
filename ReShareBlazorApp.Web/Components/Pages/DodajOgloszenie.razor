@@ -1,0 +1,145 @@
+﻿@page "/dodaj-ogloszenie"
+
+<div class="add-listing-container">
+    <!-- Header Section -->
+    <div class="page-header">
+        <h1>DODAJ NOWĄ OFERTĘ</h1>
+        <p>Uzupełnij poniższe dane, aby opublikować ogłoszenie w jednej z kategorii</p>
+    </div>
+
+    <!-- Form Section -->
+    <EditForm Model="@listingModel" OnValidSubmit="HandleSubmit" class="listing-form">
+        <DataAnnotationsValidator />
+
+        <div class="form-grid">
+            <!-- Column 1: Typ Ogłoszenia -->
+            <div class="form-column">
+                <h2 class="section-title">1. TYP OGŁOSZENIA</h2>
+                <label class="section-subtitle">Wybierz typ oferty:</label>
+
+                <div class="radio-group">
+                    <label class="radio-card @(listingModel.Type == ListingType.Odsprzedam ? "selected" : "")">
+                        <input type="radio" name="listingType" value="@ListingType.Odsprzedam"
+                               checked="@(listingModel.Type == ListingType.Odsprzedam)"
+                               @onchange="() => listingModel.Type = ListingType.Odsprzedam" />
+                        <div class="radio-content">
+                            <strong>ODSPRZEDAM:</strong> Mam coś opłaconego lub posiadam rzecz, której już nie potrzebuję. <span>(np. Bilet na koncert)</span>
+                        </div>
+                    </label>
+
+                    <label class="radio-card @(listingModel.Type == ListingType.Oddam ? "selected" : "")">
+                        <input type="radio" name="listingType" value="@ListingType.Oddam"
+                               checked="@(listingModel.Type == ListingType.Oddam)"
+                               @onchange="() => listingModel.Type = ListingType.Oddam" />
+                        <div class="radio-content">
+                            <strong>ODDAM / PRZEKAŻĘ:</strong> Chcę przekazać coś bezpłatnie lub za symboliczną kwotę. <span>(np. Sprzęt dziecięcy)</span>
+                        </div>
+                    </label>
+
+                    <label class="radio-card @(listingModel.Type == ListingType.Wypozycze ? "selected" : "")">
+                        <input type="radio" name="listingType" value="@ListingType.Wypozycze"
+                               checked="@(listingModel.Type == ListingType.Wypozycze)"
+                               @onchange="() => listingModel.Type = ListingType.Wypozycze" />
+                        <div class="radio-content">
+                            <strong>WYPOŻYCZĘ:</strong> Mam coś, co mogę udostępnić na określony czas. <span>(np. Przyczepka)</span>
+                        </div>
+                    </label>
+
+                    <label class="radio-card @(listingModel.Type == ListingType.WolneMiejsce ? "selected" : "")">
+                        <input type="radio" name="listingType" value="@ListingType.WolneMiejsce"
+                               checked="@(listingModel.Type == ListingType.WolneMiejsce)"
+                               @onchange="() => listingModel.Type = ListingType.WolneMiejsce" />
+                        <div class="radio-content">
+                            <strong>MAM WOLNE MIEJSCE:</strong> W samochodzie, hotelu, na kursie, wydarzeniu czy wycieczce. <span>(np. Miejsce w samochodzie)</span>
+                        </div>
+                    </label>
+
+                    <label class="radio-card @(listingModel.Type == ListingType.Szukam ? "selected" : "")">
+                        <input type="radio" name="listingType" value="@ListingType.Szukam"
+                               checked="@(listingModel.Type == ListingType.Szukam)"
+                               @onchange="() => listingModel.Type = ListingType.Szukam" />
+                        <div class="radio-content">
+                            <strong>SZUKAM / POTRZEBUJĘ:</strong> Publikuję zapotrzebowanie i czekam na propozycje. <span>(np. Szukam dwóch skipassów)</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Column 2: Szczegóły Ogłoszenia -->
+            <div class="form-column">
+                <h2 class="section-title">2. SZCZEGÓŁY OGŁOSZENIA</h2>
+
+                <div class="form-group">
+                    <label>Tytuł ogłoszenia</label>
+                    <InputText @bind-Value="listingModel.Title" class="register-input" placeholder="np. Bilet na koncert Foo Fighters, 10 maja - Warszawa" />
+                </div>
+
+                <div class="form-group">
+                    <label>Opis</label>
+                    <InputTextArea @bind-Value="listingModel.Description" class="register-input textarea" rows="4" placeholder="Napisz dokładny opis, stan przedmiotu, szczegóły wydarzenia, itp." />
+                </div>
+
+                <div class="form-group">
+                    <label>Lokalizacja / Trasa</label>
+                    <InputText @bind-Value="listingModel.Location" class="register-input" placeholder="Miasto, region lub skąd-dokąd (np. Poznań -> Warszawa)" />
+                </div>
+
+                <div class="form-group">
+                    <label>Cena / Wartość</label>
+                    <div class="input-with-prefix">
+                        <span class="prefix">zł</span>
+                        <InputNumber @bind-Value="listingModel.Price" class="register-input" placeholder="Kwota lub opcja darmowa / symboliczna" />
+                    </div>
+                    <small class="hint">(Wprowadź 0 lub zostaw puste dla ODDAM/SZUKAM)</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Dodatkowe Informacje -->
+        <div class="form-section-full">
+            <h2 class="section-title">3. DODATKOWE INFORMACJE</h2>
+
+            <div class="upload-box">
+                <span>Dodaj zdjęcia (opcjonalne) - Przeciągnij i upuść pliki lub kliknij</span>
+                <button type="button" class="btn-upload">📷 ⬆</button>
+            </div>
+
+            <div class="register-terms">
+                <InputCheckbox @bind-Value="listingModel.AcceptTerms" />
+                <label>Zgadzam się z <a href="/regulamin" target="_blank">regulaminem serwisu</a></label>
+            </div>
+
+            <div class="submit-container">
+                <button type="submit" class="register-button">OPUBLIKUJ OGŁOSZENIE</button>
+            </div>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private ListingModel listingModel = new();
+
+    private void HandleSubmit()
+    {
+        // Logika dodawania ogłoszenia
+    }
+
+    public class ListingModel
+    {
+        public ListingType Type { get; set; } = ListingType.Odsprzedam;
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public string Location { get; set; } = string.Empty;
+        public decimal? Price { get; set; }
+        public bool AcceptTerms { get; set; }
+    }
+
+    public enum ListingType
+    {
+        Odsprzedam,
+        Oddam,
+        Wypozycze,
+        WolneMiejsce,
+        Szukam
+    }
+}

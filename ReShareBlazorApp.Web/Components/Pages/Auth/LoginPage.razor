@@ -2,28 +2,42 @@
 @using ReShareBlazorApp.Web.Models
 @rendermode InteractiveServer
 @inject NavigationManager nav
-<h3>LoginPage</h3>
+
 <form method="post" action="/auth/login">
     <AntiforgeryToken />
-    <div class="login-card">
-        <div class="login-label">
-            <label>E-mail</label>
-            <input name="Email"
-                   type="email"
-                   placeholder="Wpisz e-mail!"
-                   required />
-        </div>
-        <div class="login-label">
-            <label>Hasło</label>
-            <input name="Password"
-                   type="password"
-                   placeholder="Wpisz hasło!"
-                   required />
+    <div class="register-container">
+        <div class="register-card">
+            <h2>Zaloguj się</h2>
+            <p>Wpisz swoje dane, aby się zalogować.</p>
+
+            <div class="register-field">
+                <label>E-mail</label>
+                <input name="Email"
+                       type="email"
+                       class="register-input"
+                       placeholder="Wpisz e-mail!"
+                       required />
+            </div>
+
+            <div class="register-field">
+                <label>Hasło</label>
+                <input name="Password"
+                       type="password"
+                       class="register-input"
+                       placeholder="Wpisz hasło!"
+                       required />
+            </div>
+
+            <button type="submit" class="register-button">
+                Zaloguj się
+            </button>
+
+            <button type="button" class="btn-switch-auth" @onclick='() => nav.NavigateTo("/register")'>
+                Nie masz konta? <span>Zarejestruj się!</span>
+            </button>
         </div>
     </div>
-    <button class="btn btn-primary" type="submit">Zaloguj się</button>
 </form>
-<button class="btn btn-primary" @onclick='() => nav.NavigateTo("/register")'>Nie masz konta? Zarejestruj się!</button>
 
 @code {
     public LoginModel LoginModel { get; set; } = new();

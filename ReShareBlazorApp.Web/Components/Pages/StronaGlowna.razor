@@ -1,0 +1,137 @@
+﻿@page "/str"
+
+<div class="modern-landing">
+    <!-- Hero Section / Wyszukiwarka główna -->
+    <section class="hero-wrapper">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Znajdź to, czego szukasz.<br />Wystaw ogłoszenie w kilka sekund.</h1>
+            <p class="hero-subtitle">Największa baza lokalnych ogłoszeń: odsprzedaż, usługi, transport i przedmioty z drugiej ręki.</p>
+
+            <div class="hero-search-box">
+                <input type="text" placeholder="Czego szukasz? (np. bilet, telefon, transport)..." class="hero-search-input" />
+                <button type="button" class="register-button hero-search-btn">Szukaj</button>
+            </div>
+
+            <div class="hero-actions">
+                <a href="/dodaj-ogloszenie" class="btn-hero-secondary">+ Dodaj darmowe ogłoszenie</a>
+            </div>
+        </div>
+
+        <!-- Kafelki kategorii -->
+        <div class="categories-grid">
+            <div class="category-card" @onclick='() => FilterCategory("Odsprzedam")'>
+                <div class="card-icon-wrapper">🎟️</div>
+                <div class="card-text">
+                    <h3>Odsprzedam</h3>
+                    <span class="count">294 oferty</span>
+                </div>
+            </div>
+            <div class="category-card" @onclick='() => FilterCategory("Oddam")'>
+                <div class="card-icon-wrapper">🎁</div>
+                <div class="card-text">
+                    <h3>Oddam za darmo</h3>
+                    <span class="count">142 oferty</span>
+                </div>
+            </div>
+            <div class="category-card" @onclick='() => FilterCategory("Wypozycze")'>
+                <div class="card-icon-wrapper">🔑</div>
+                <div class="card-text">
+                    <h3>Wypożyczę</h3>
+                    <span class="count">87 ofert</span>
+                </div>
+            </div>
+            <div class="category-card" @onclick='() => FilterCategory("WolneMiejsce")'>
+                <div class="card-icon-wrapper">🚗</div>
+                <div class="card-text">
+                    <h3>Wolne Miejsce</h3>
+                    <span class="count">103 oferty</span>
+                </div>
+            </div>
+            <div class="category-card" @onclick='() => FilterCategory("Szukam")'>
+                <div class="card-icon-wrapper">🔍</div>
+                <div class="card-text">
+                    <h3>Szukam</h3>
+                    <span class="count">76 ofert</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ostatnio Dodane Oferty -->
+    <section class="recent-listings-section">
+        <div class="section-header">
+            <div>
+                <h2>Najnowsze ogłoszenia</h2>
+                <p>Sprawdzaj oferty dodawane na bieżąco przez użytkowników</p>
+            </div>
+            <a href="/przegladaj" class="view-all-link">Zobacz wszystkie &rarr;</a>
+        </div>
+
+        <div class="listings-grid">
+            @foreach (var offer in recentOffers)
+            {
+                <div class="listing-card">
+                    <div class="listing-image" style="background-image: url('@offer.ImageUrl')">
+                        <span class="time-badge">🕒 @offer.TimeAdded</span>
+                        <button type="button" class="favorite-mini-btn">❤️</button>
+                    </div>
+                    <div class="listing-details">
+                        <span class="type-pill">@offer.CategoryType</span>
+                        <h4>@offer.Title</h4>
+                        <p class="description">@offer.Description</p>
+                        <div class="listing-footer">
+                            <span class="price-tag">@offer.PriceText</span>
+                            <span class="details-arrow">&rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-brand">
+            <span class="main-navbar-brand">ReShare</span>
+            <p>Platforma ogłoszeniowa</p>
+        </div>
+        <div class="footer-links">
+            <a href="/przegladaj">Oferty</a>
+            <a href="/regulamin">Regulamin</a>
+            <a href="/o-nas">O nas</a>
+            <a href="/kontakt">Kontakt</a>
+        </div>
+        <div class="footer-copyright">
+            © Copyright 2026
+        </div>
+    </footer>
+</div>
+
+@code {
+    @inject NavigationManager Navigation
+
+    private List<OfferItem> recentOffers = new()
+    {
+        new OfferItem { Title = "Bilet Måneskin Praga", Description = "Bilet Måneskin Praga, sektor stojący", CategoryType = "Odsprzedam", PriceText = "300 PLN", TimeAdded = "17:30", ImageUrl = "" },
+        new OfferItem { Title = "Fotelik Dziecięcy Maxi-Cosi", Description = "Stan bardzo dobry, odbiór osobisty", CategoryType = "Oddam", PriceText = "Bezpłatnie", TimeAdded = "17:30", ImageUrl = "" },
+        new OfferItem { Title = "Namiot 4-osobowy", Description = "Idealny na wypady w góry lub nad jezioro", CategoryType = "Wypożyczę", PriceText = "50 PLN/doba", TimeAdded = "17:28", ImageUrl = "" },
+        new OfferItem { Title = "Wolne miejsce: Nowy Sącz -> Kraków", Description = "Wyjazd w piątek o 15:00, wygodne auto", CategoryType = "Wolne Miejsce", PriceText = "25 PLN", TimeAdded = "17:30", ImageUrl = "" },
+        new OfferItem { Title = "Szukam skipassu Zakopane", Description = "Interesuje mnie karnet na weekend", CategoryType = "Szukam", PriceText = "Marzec '26", TimeAdded = "17:30", ImageUrl = "" }
+    };
+
+    private void FilterCategory(string category)
+    {
+        Navigation.NavigateTo($"/przegladaj?kategoria={category}");
+    }
+
+    public class OfferItem
+    {
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public string CategoryType { get; set; } = string.Empty;
+        public string PriceText { get; set; } = string.Empty;
+        public string TimeAdded { get; set; } = string.Empty;
+        public string ImageUrl { get; set; } = string.Empty;
+    }
+}

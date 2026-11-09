@@ -1,0 +1,96 @@
+﻿@page "/wiadomosci"
+
+<div class="messages-container">
+    <div class="page-header">
+        <h1>Wiadomości</h1>
+        <p>Rozmawiaj z innymi użytkownikami na temat ogłoszeń i transakcji</p>
+    </div>
+
+    <div class="messenger-layout">
+        <!-- Lewa kolumna: Lista konwersacji -->
+        <div class="conversations-sidebar card">
+            <div class="sidebar-search">
+                <input type="text" placeholder="Szukaj konwersacji..." class="register-input" />
+            </div>
+
+            <div class="conversation-list">
+                <div class="conversation-item active">
+                    <div class="avatar">KS</div>
+                    <div class="conv-info">
+                        <div class="conv-top">
+                            <h4>Karolina S.</h4>
+                            <span class="conv-time">17:35</span>
+                        </div>
+                        <p>Odsprzedam bilet: Męskie Granie Katowice</p>
+                    </div>
+                </div>
+
+                <div class="conversation-item">
+                    <div class="avatar">PW</div>
+                    <div class="conv-info">
+                        <div class="conv-top">
+                            <h4>Piotr W.</h4>
+                            <span class="conv-time">Wczoraj</span>
+                        </div>
+                        <p>Mam wolne miejsce: Warszawa -> Gdańsk</p>
+                    </div>
+                </div>
+
+                <div class="conversation-item">
+                    <div class="avatar">AL</div>
+                    <div class="conv-info">
+                        <div class="conv-top">
+                            <h4>Ania L.</h4>
+                            <span class="conv-time">24.02</span>
+                        </div>
+                        <p>Dzięki za sprawną transakcję!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prawa kolumna: Okno czatu -->
+        <div class="chat-window card">
+            <!-- Nagłówek czatu -->
+            <div class="chat-header">
+                <div class="chat-user">
+                    <div class="avatar">KS</div>
+                    <div>
+                        <h3>Karolina S.</h3>
+                        <span class="chat-subtitle">Dotyczy: Bilet na koncert Męskie Granie</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historia wiadomości -->
+            <div class="chat-messages">
+                <div class="message received">
+                    <div class="message-bubble">
+                        Cześć! Czy bilet na Męskie Granie jest jeszcze aktualny?
+                    </div>
+                    <span class="message-time">17:30</span>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-bubble">
+                        Cześć! Tak, jak najbardziej aktualny. Chcesz go przejąć?
+                    </div>
+                    <span class="message-time">17:32</span>
+                </div>
+
+                <div class="message received">
+                    <div class="message-bubble">
+                        Super, a jaka jest ostateczna cena i jak możemy sfinalizować przekazanie biletu?
+                    </div>
+                    <span class="message-time">17:35</span>
+                </div>
+            </div>
+
+            <!-- Formularz wysyłania wiadomości -->
+            <div class="chat-input-area">
+                <input type="text" placeholder="Napisz wiadomość..." class="register-input" />
+                <button type="button" class="register-button chat-send-btn">Wyślij</button>
+            </div>
+        </div>
+    </div>
+</div>

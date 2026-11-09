@@ -1,0 +1,97 @@
+﻿@page "/profil"
+@using ReShareBlazorApp.Web.Components.Elements
+
+<div class="profile-container">
+    <main class="profile-content">
+        <!-- User Banner Card -->
+        <div class="card user-banner">
+            <div class="user-info">
+                <div class="avatar-large">
+                    <span>👤</span>
+                </div>
+                <h2>Ania Nowak</h2>
+            </div>
+            <button class="btn-edit" @onclick="EdytujProfil">Edytuj profil</button>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn @(activeTab == "profil" ? "active" : "")" @onclick='() => SetTab("profil")'>Mój Profil</button>
+            <button class="tab-btn @(activeTab == "ogloszenia" ? "active" : "")" @onclick='() => SetTab("ogloszenia")'>Moje Ogłoszenia</button>
+            <button class="tab-btn @(activeTab == "ustawienia" ? "active" : "")" @onclick='() => SetTab("ustawienia")'>Ustawienia</button>
+            <button class="tab-btn @(activeTab == "wiadomosci" ? "active" : "")" @onclick='() => SetTab("wiadomosci")'>Wiadomości</button>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Left Column: Details -->
+            <div class="card details-card">
+                <h3>Informacje</h3>
+                <div class="info-row">
+                    <span class="label">E-mail</span>
+                    <span class="value">ania@anowak.com</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Numer telefonu</span>
+                    <span class="value">•••••••••••</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Miasto</span>
+                    <span class="value">Miasto</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Data rejestracji</span>
+                    <span class="value">28.03.2023</span>
+                </div>
+            </div>
+
+            <!-- Right Column: Stats & Recent Announcements -->
+            <div class="right-column">
+                <div class="card stats-card">
+                    <h3>Moja aktywność</h3>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Dodane ogłoszenia</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Aktywne transakcje</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">4.8 ★</span>
+                            <span class="stat-label">Opinie</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card recent-card">
+                    <h3>Ostatnie Ogłoszenia</h3>
+                    <div class="announcements-grid">
+                        <div class="announcement-item">
+                            <div class="img-placeholder red"></div>
+                            <div class="announcement-info">
+                                <h4>Bilet na koncert Męskie Granie</h4>
+                                <p>Zakopane</p>
+                            </div>
+                        </div>
+                        <div class="announcement-item">
+                            <div class="img-placeholder blue"></div>
+                            <div class="announcement-info">
+                                <h4>Wolne miejsce: Zakopane</h4>
+                                <p>Zakopane</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+@code {
+    private string activeTab = "profil";
+
+    private void SetTab(string tabName) => activeTab = tabName;
+    private void EdytujProfil() { }
+}

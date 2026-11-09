@@ -1,0 +1,127 @@
+﻿@page "/przegladaj"
+
+<div class="browse-container">
+    <h1 class="page-title">Przeglądaj Dostępne Oferty</h1>
+
+    <!-- Search Bar -->
+    <div class="search-bar-container">
+        <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" @bind="searchQuery" placeholder="Czego szukasz? (np. koncert Sanah...)" class="search-input" />
+        </div>
+        <button class="btn-search" @onclick="Search">SZUKAJ</button>
+    </div>
+
+    <!-- Main Layout: Sidebar Filters + Offer Grid -->
+    <div class="content-layout">
+        <!-- Sidebar Filters -->
+        <aside class="filters-sidebar">
+            <h2>Filtruj Wyniki</h2>
+
+            <div class="filter-group">
+                <h3>TYP OFERTY</h3>
+                <label class="checkbox-label"><input type="checkbox" @bind="filterOdsprzedam" /> ODSPRZEDAM 🏷️</label>
+                <label class="checkbox-label"><input type="checkbox" @bind="filterOddam" /> ODDAM</label>
+                <label class="checkbox-label"><input type="checkbox" @bind="filterWypozycze" /> WYPOŻYCZĘ</label>
+                <label class="checkbox-label"><input type="checkbox" @bind="filterWolneMiejsce" /> MAM WOLNE MIEJSCE</label>
+                <label class="checkbox-label"><input type="checkbox" @bind="filterSzukam" /> SZUKAM</label>
+            </div>
+
+            <div class="filter-group">
+                <h3>KATEGORIA</h3>
+                <ul class="category-list">
+                    <li class="@(selectedCategory == "Koncerty" ? "active" : "")" @onclick='() => SelectCategory("Koncerty")'>Koncerty</li>
+                    <li class="@(selectedCategory == "Transport" ? "active" : "")" @onclick='() => SelectCategory("Transport")'>Transport</li>
+                    <li class="@(selectedCategory == "Sprzęt" ? "active" : "")" @onclick='() => SelectCategory("Sprzęt")'>Sprzęt</li>
+                    <li class="@(selectedCategory == "Karnety" ? "active" : "")" @onclick='() => SelectCategory("Karnety")'>Karnety</li>
+                    <li class="@(selectedCategory == "Inne" ? "active" : "")" @onclick='() => SelectCategory("Inne")'>Inne</li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <h3>LOKALIZACJA</h3>
+                <input type="text" @bind="locationFilter" placeholder="Miasto lub region" class="filter-input" />
+            </div>
+
+            <div class="filter-group">
+                <h3>CENA</h3>
+                <div class="price-labels">
+                    <span>@minPrice zł</span> - <span>@maxPrice zł</span>
+                </div>
+                <input type="range" min="0" max="500" @bind="maxPrice" class="price-range" />
+            </div>
+
+            <button class="btn-apply-filters" @onclick="ApplyFilters">ZASTOSUJ FILTRY</button>
+        </aside>
+
+        <!-- Offer Cards Grid -->
+        <main class="offers-grid-section">
+            <div class="offers-grid">
+                @foreach (var offer in offers)
+                {
+                    <div class="offer-card">
+                        <div class="card-image" style="background-image: url('@offer.ImageUrl')">
+                            <button class="favorite-btn">❤️</button>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-title-row">
+                                <span class="type-icon">@offer.Icon</span>
+                                <h4 class="card-title">@offer.Title</h4>
+                            </div>
+                            <div class="rating-stars">★★★★★</div>
+                            <div class="card-footer">
+                                <div class="seller-info">
+                                    <span class="seller-avatar">👤</span>
+                                    <span class="seller-name">@offer.SellerName</span>
+                                </div>
+                                <div class="price-tag">@offer.Price zł</div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="load-more-container">
+                <button class="btn-load-more" @onclick="LoadMore">Więcej ofert</button>
+            </div>
+        </main>
+    </div>
+</div>
+
+@code {
+    private string searchQuery = "";
+    private string locationFilter = "";
+    private string selectedCategory = "";
+
+    private bool filterOdsprzedam = true;
+    private bool filterOddam = true;
+    private bool filterWypozycze = true;
+    private bool filterWolneMiejsce = true;
+    private bool filterSzukam = true;
+
+    private int minPrice = 0;
+    private int maxPrice = 500;
+
+    private List<OfferItem> offers = new()
+    {
+        new OfferItem { Title = "Odsprzedam bilet: Męskie Granie Katowice", Price = 250, SellerName = "Karolina S.", Icon = "🎟️" },
+        new OfferItem { Title = "Mam wolne miejsce: Warszawa -> Gdańsk", Price = 60, SellerName = "Piotr W.", Icon = "🚗" },
+        new OfferItem { Title = "Oddam: Wózek dziecięcy 3w1", Price = 0, SellerName = "Ania L.", Icon = "🎁" },
+        new OfferItem { Title = "Szukam: 2 skipassy Szczyrk", Price = 250, SellerName = "Michał K.", Icon = "🔍" },
+        new OfferItem { Title = "Odsprzedam: Koncert Sanah Warszawa", Price = 250, SellerName = "Tomek R.", Icon = "🎟️" }
+    };
+
+    private void Search() { }
+    private void ApplyFilters() { }
+    private void SelectCategory(string category) => selectedCategory = category;
+    private void LoadMore() { }
+
+    public class OfferItem
+    {
+        public string Title { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+        public string SellerName { get; set; } = string.Empty;
+        public string Icon { get; set; } = string.Empty;
+        public string ImageUrl { get; set; } = string.Empty;
+    }
+}
